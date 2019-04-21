@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>VUE Bank</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div id="root">
+      <div class="container">
+        <h1 class="text-center">VUE BANK</h1>
+        <div class="row">
+          <div class="col-6">
+            <h3>Załóż konto</h3>
+            <form >
+              <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control" v-model="newUser.email">
+              </div>
+              <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" v-model="newUser.password">
+              </div>
+              <div class="form-group form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" v-model="regulamin"> Regulamin
+                </label>
+              </div>
+
+              <div v-if="errorNewUser.length > 0" class="alert alert-danger" >
+                <ul v-for="error in errorNewUser">
+                  <li>{{ error }}</li>
+                </ul>
+              </div>
+              <button type="button" class="btn btn-primary" @click="registerUser()">Zarejestruj</button>
+            </form>
+          </div>
+          <div class="col-6">
+            <h3>Zaloguj się</h3>
+            <form>
+              <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control"v-model="loginUser.email">
+              </div>
+              <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" v-model="loginUser.password">
+              </div>
+              <div class="alert alert-danger" v-if="errorLogin == true">
+                Niepoprawne dane logowania
+              </div>
+              <button type="button" class="btn btn-primary" @click="loginUserForm()">Loginuj się</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" charset="utf-8"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

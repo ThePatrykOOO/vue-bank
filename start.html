@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>VUE Bank</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div id="root">
+      <div class="jumbotron text-center" style="margin-bottom:0">
+        <h1>Vue Bank</h1>
+      </div>
+
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" href="start.html">Start</a>
+        <button type="button" class="btn btn-link" @click="logout()">Wyloguj</button>
+        <!-- <a class="navbar-brand" href="#">Start</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Ustawienia</a>
+            </li>
+            <li class="nav-item">
+
+            </li>
+          </ul>
+        </div> -->
+      </nav>
+
+      <div class="col-12" style="margin-top:30px">
+        <div class="row">
+          <div class="col-sm-4">
+            <h2>Witaj</h2>
+            <h5>{{user.email}}</h5>
+            <h6>{{user.cash}} $</h6>
+            <ul class="nav nav-pills flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" id="newtransfer" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Zlec przelew</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="addmoney" data-toggle="pill" href="#v-pills-addmoney" role="tab" aria-controls="v-pills-messages" aria-selected="false">Dodaj pieniądze</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="history" data-toggle="pill" href="#v-pills-history" role="tab" aria-controls="v-pills-messages" aria-selected="false">Historia</a>
+              </li>
+            </ul>
+            <hr class="d-sm-none">
+          </div>
+          <div class="col-sm-8">
+            <div class="tab-content" id="v-pills-tabContent">
+              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="newtransfer">
+                <div class="form-group">
+                  <label for="email">Email address: </label>
+                  <input type="email" class="form-control" v-model="transfer.email">
+                </div>
+                <div class="form-group">
+                  <label for="email">Kwota:</label>
+                  <input type="number" class="form-control" v-model="transfer.cash">
+                </div>
+                <button type="button" class="btn btn-primary" @click="send_transfer()">Wyślij przelew</button>
+                <div class="alert alert-danger" v-if="errorTransfer.length > 0">
+                  <ul v-for="error in errorTransfer">
+                    <li>{{ error }}</li>
+                  </ul>
+                </div>
+                <div class="alert alert-success" v-if="successTransfer == true">
+                  Przelew został wysłany
+                </div>
+              </div>
+              <div class="tab-pane fade" id="v-pills-addmoney" role="tabpanel" aria-labelledby="addmoney">
+                <h3>Twoje środki {{user.cash}}$</h3>
+                <button type="button" class="btn btn-primary" @click="add_money()">Dodaj 1$</button>
+              </div>
+              <div class="tab-pane fade" id="v-pills-history" role="tabpanel" aria-labelledby="history">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h6>Przelewy wychodzące</h6>
+                    <table class="table table-striped">
+                      <tr>
+                        <th>Wysyłający</th>
+                        <th>Kwota</th>
+                      </tr>
+                      <tr v-for="transfer in sentTransfers">
+                        <td>{{ transfer[0] }}</td>
+                        <td>{{ transfer[1] }}$</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="col-md-6">
+                    <h6>Przelewy wchodzące</h6>
+                    <table class="table table-striped">
+                      <tr>
+                        <th>Wysyłający</th>
+                        <th>Kwota</th>
+                      </tr>
+                      <tr v-for="transfer in receiveTransfers">
+                        <td>{{ transfer[0] }}</td>
+                        <td>{{ transfer[1] }}$</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" charset="utf-8"></script>
+    <script src="components/new_transfer.js"></script>
+    <script src="components/addmoney.js"></script>
+    <script src="components/history.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
